@@ -1,16 +1,10 @@
-web:
- restart: always
- build: .
- links:
-  - db:postgres
-  - redis:redis
- env_file: .env
- ports:
-  - "8000:8000"
- volumes:
-  - ".:/localapp:rw"
-  - "./data:/data:rw"
- command: python manage.py runserver 0.0.0.0:8000
+#redis:
+#  restart: always
+#  image: redis:latest
+#  ports:
+#    - "6379:6379"
+#  volumes:
+#    - redisdata:/data
 
 db:
   restart: always
@@ -18,13 +12,20 @@ db:
   ports:
     - "5432:5432"
   volumes:
-  - ".:/app:rw"
+    - ".:/localapp:rw"
+    - "./data/backups:/data/backups:rw"
 
-redis:
-  restart: always
-  image: redis:latest
-  ports:
-    - "6379:6379"
-  volumes:
-    - redisdata:/data
+web:
+ restart: always
+ build: .
+ links:
+  - "db:postgres"
+  #- redis:redis
+ env_file: .env
+ ports:
+  - "8000:8000"
+ volumes:
+  - ".:/localapp:rw"
+  - "./data:/data:rw"
+ command: python manage.py runserver 0.0.0.0:8000
 

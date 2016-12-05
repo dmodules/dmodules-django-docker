@@ -20,13 +20,17 @@ TEMPLATE_DEBUG = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db',
+        'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'postgres',
         'PORT': '5432',
     }
 }
+
+JENKINS_TASKS = (
+    'django_jenkins.tasks.run_pylint',
+)
 
 # Application definition
 
@@ -37,6 +41,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #default dmodules apps
+    #'django_jenkins'
 )
 
 MIDDLEWARE_CLASSES = (
