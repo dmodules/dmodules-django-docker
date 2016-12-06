@@ -19,6 +19,7 @@ COPY scripts/install.sh /localapp/scripts/install.sh
 COPY scripts/wait-for-postgres.sh /localapp/scripts/wait-for-postgres.sh
 
 RUN chmod +x /localapp/scripts/install.sh
+RUN chmod +x /localapp/scripts/wait-for-postgres.sh
 
 RUN DEBIAN_FRONTEND=noninteractive /localapp/scripts/install.sh
 
