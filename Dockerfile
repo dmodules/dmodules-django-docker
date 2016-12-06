@@ -21,7 +21,6 @@ RUN chmod +x /localapp/scripts/install.sh
 
 RUN DEBIAN_FRONTEND=noninteractive /localapp/scripts/install.sh
 
-
 # Expose ports
 # 8000 = Gunicorn
 # 3306 = MySQL
