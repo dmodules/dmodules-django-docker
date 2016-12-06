@@ -11,18 +11,13 @@ WORKDIR /localapp
 
 ENV PYTHONPATH /localapp/src/:$PYTHONPATH
 
-
-#RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' >/etc/apt/sources.list.d/pgdg.list
-#RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-#RUN apt-get update
-#RUN apt-get -y install postgresql-client
-
-#ADD scripts/backup.sh /usr/local/bin/backup
-#RUN chmod +x /usr/local/bin/backup
-
+COPY . /localapp
 COPY db/init.sql /docker-entrypoint-initdb.d/init.sql
 
-COPY . /localapp
+RUN chmod 777 /localapp/scripts/install.sh
+
+RUN DEBIAN_FRONTEND=noninteractive /localapp/scripts/install.sh
+
 
 ADD requirements.txt /localapp/
 RUN pip install -r requirements.txt
