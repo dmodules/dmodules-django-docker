@@ -27,3 +27,4 @@ RUN DEBIAN_FRONTEND=noninteractive /localapp/scripts/install.sh
 # 3306 = MySQL
 EXPOSE 8000 5432
 
+
