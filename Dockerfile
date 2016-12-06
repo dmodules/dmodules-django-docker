@@ -15,7 +15,9 @@ COPY fabfile.py /localapp/fabfile.py
 
 ENV PYTHONPATH /localapp/src/:$PYTHONPATH
 
-RUN chmod 777 /localapp/scripts/install.sh
+COPY scripts/install.sh /localapp/scripts/install.sh
+
+RUN chmod +x /localapp/scripts/install.sh
 
 RUN DEBIAN_FRONTEND=noninteractive /localapp/scripts/install.sh
 
