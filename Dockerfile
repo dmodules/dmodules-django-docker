@@ -8,20 +8,20 @@ ENV PYTHONUNBUFFERED=1 \
 
 COPY db/init.sql /docker-entrypoint-initdb.d/init.sql
 
-RUN mkdir -p /localapp && mkdir -p /data
+RUN mkdir -p /localapp && mkdir -p /data && mkdir -p /scripts
 WORKDIR /localapp
 
-COPY fabfile.py /localapp/fabfile.py
+COPY fabfile.py /scripts/fabfile.py
 
-ENV PYTHONPATH /localapp/src/:$PYTHONPATH
+ENV PYTHONPATH /scripts/src/:$PYTHONPATH
 
-COPY scripts/install.sh /localapp/scripts/install.sh
-COPY scripts/wait-for-postgres.sh /localapp/scripts/wait-for-postgres.sh
+COPY scripts/install.sh /scripts/install.sh
+COPY scripts/wait-for-postgres.sh /scripts/wait-for-postgres.sh
 
-RUN chmod +x /localapp/scripts/install.sh
-RUN chmod +x /localapp/scripts/wait-for-postgres.sh
+RUN chmod +x /scripts/install.sh
+RUN chmod +x /scripts/wait-for-postgres.sh
 
-RUN DEBIAN_FRONTEND=noninteractive /localapp/scripts/install.sh
+RUN DEBIAN_FRONTEND=noninteractive /scripts/install.sh
 
 # Expose ports
 # 8000 = Gunicorn
