@@ -16,6 +16,7 @@ COPY fabfile.py /localapp/fabfile.py
 ENV PYTHONPATH /localapp/src/:$PYTHONPATH
 
 COPY scripts/install.sh /localapp/scripts/install.sh
+COPY scripts/wait-for-postgres.sh /localapp/scripts/wait-for-postgres.sh
 
 RUN chmod +x /localapp/scripts/install.sh
 
