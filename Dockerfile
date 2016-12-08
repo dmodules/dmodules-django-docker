@@ -24,8 +24,5 @@ RUN chmod +x /scripts/wait-for-postgres.sh
 RUN DEBIAN_FRONTEND=noninteractive /scripts/install.sh
 
 # Expose ports
-# 8000 = Gunicorn
-# 3306 = MySQL
-EXPOSE 8000 5432
-
-
+# 80 = Ngix
+EXPOSE 80 5432
