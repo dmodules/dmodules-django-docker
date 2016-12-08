@@ -13,7 +13,7 @@ WORKDIR /localapp
 
 COPY fabfile.py /scripts/fabfile.py
 
-ENV PYTHONPATH /scripts/src/:$PYTHONPATH
+ENV PYTHONPATH /localapp/src/:$PYTHONPATH
 
 COPY scripts/install.sh /scripts/install.sh
 COPY scripts/wait-for-postgres.sh /scripts/wait-for-postgres.sh
