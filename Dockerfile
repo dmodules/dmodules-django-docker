@@ -17,12 +17,6 @@ WORKDIR /localapp
 COPY fabfile.py /scripts/fabfile.py
 
 RUN apt-get install -y cron
- 
-# Give execution rights on the cron job
-RUN chmod 0644 /var/spool/cron/crontabs/root
- 
-# Run the command on container startup
-CMD ["cron", "-f"]
 
 ENV PYTHONPATH /localapp/src/:$PYTHONPATH
 
