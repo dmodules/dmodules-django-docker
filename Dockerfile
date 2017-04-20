@@ -5,6 +5,9 @@ ENV PYTHONUNBUFFERED=1 \
     PATH=/virtualenv/bin:/root/.local/bin:$PATH \
     LC_ALL=C.UTF-8 \
     LANG=C.UTF-8
+    
+RUN apt-get update
+RUN apt-get -y install nano
 
 COPY db/init.sql /docker-entrypoint-initdb.d/init.sql
 
