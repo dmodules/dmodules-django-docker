@@ -30,4 +30,4 @@ RUN DEBIAN_FRONTEND=noninteractive /scripts/install.sh
 
 # Expose ports
 # 80 = Ngix
-EXPOSE 80 5432
+EXPOSE 80
