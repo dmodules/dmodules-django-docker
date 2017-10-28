@@ -10,7 +10,6 @@ RUN apt-get update
 RUN apt-get -y install nano
 RUN apt-get -y install jpegoptim
 RUN apt-get install -y gettext libgettextpo-dev
-RUN apt-get -y install libgdal-dev
 
 
 COPY db/init.sql /docker-entrypoint-initdb.d/init.sql
