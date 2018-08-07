@@ -1,0 +1,34 @@
+#!/bin/bash
+bf="${0##*/}"
+opt=""
+files="$(find . -maxdepth 1 -name '*.py' -print) $(find apps scrapy_femploi/spiders -name '*.py' -not -path '*/migrations/*' -print) scrapy_femploi/items.py scrapy_femploi/utils.py"
+
+help() {
+    echo "${bf}: Launch pylint and autopep8"
+    echo "use: ${bf} [OPTION]"    
+    exit
+}
+
+
+for arg in "$@"
+do
+    case "$arg" in
+            --fix)
+                autopep8 --in-place --aggressive --aggressive --max-line-length 120 $files
+                ;;
+            
+            --gettext)
+                opt="--load-plugins=missing_gettext ${opt}"
+                ;;
+
+            --version)
+                help
+                ;;
+
+            --help)
+                help
+                ;;
+    esac
+done
+
+pylint $opt $files

@@ -25,9 +25,16 @@ ENV PYTHONPATH /localapp/src/:$PYTHONPATH
 
 COPY scripts/install.sh /scripts/install.sh
 COPY scripts/wait-for-postgres.sh /scripts/wait-for-postgres.sh
+COPY scripts/check scripts/cron_start /usr/local/bin/
 
+RUN chmod +x /scripts/*.sh /usr/local/bin/check /usr/local/bin/cron_start
 RUN chmod +x /scripts/install.sh
 RUN chmod +x /scripts/wait-for-postgres.sh
+
+# set cron job (USE UTC time)
+RUN export CRON="0 21	* * *	root	/scripts/cron_execute.sh"; \
+    sed -i -e '/PATH=/a\LC_ALL=C.UTF-8\nLANG=C.UTF-8' -e '/$CRON/d' /etc/crontab; \
+    echo "$CRON" >> /etc/crontab
 
 RUN DEBIAN_FRONTEND=noninteractive /scripts/install.sh
 

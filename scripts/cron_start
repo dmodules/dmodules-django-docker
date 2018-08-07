@@ -1,0 +1,10 @@
+#!/bin/bash
+if [ $# -ge 1 ]; then
+    cp "$1" /etc/environment
+fi
+
+echo "Environment variables:"
+sed "s/.*/    &/" "$1"
+echo ""
+echo "cron start..."
+cron -f
